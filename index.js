@@ -1,12 +1,106 @@
 // TODO: Include packages needed for this application
 var inquirer = require("inquirer");
+var fs = require("fs");
 // TODO: Create an array of questions for user input
 // const questions = ["Title? ","Table of Contents? ","Installation? ","Usage? ","License? ","Contributing? ","Tests? ","Questions? "];
 
-
-
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
+//function writeToFile(fileName, data)
+
+
+// ## Table Of Cotents
+
+// - [Installation And Usage](#installation)
+// - [Usage](#Usage)
+// - [Git Pages](#pages)
+
+
+
+function writeToFile(data) {
+    let installation, usage, contribute, tests, table="";
+    // let temp = ``;
+    let header =
+    `
+# ${data.title}
+## Description
+${data.Description}
+    `;
+
+    for(const[key,val] of Object.entries(data)){
+        if(val){
+            if(key != "title" && key != "github" && key != "email"){
+                table+=`- [${key}](#${key.toLowerCase()})\n`;
+            }
+        }
+    }
+    installation = 
+        `
+## Table of Contents
+${table}
+## Installtion
+${data.Installation}
+        
+        `;
+    if(data.Usage){
+        usage = 
+        `
+## Usage
+${data.Usage}
+        `;
+    }else{
+        usage="";
+    }
+
+    if(data.Contribute){
+        contribute =
+        `
+## Contribute
+${data.Contribute}
+        `;
+    }else{
+        contribute="";
+    }
+
+    if(data.Tests){
+        tests=
+        `
+## Tests
+${data.Tests}
+        `;
+    }else{
+        tests="";
+    }
+    let body = 
+    `
+
+${installation}
+${usage}
+${contribute}
+${tests}
+    `;
+
+    let footer = 
+    `
+## Liscense
+${data.License}
+## Questions
+You can find me on Github under the username: ${data.github}
+
+Or you can contact me via email @ ${data.email}
+
+This README was generated with a readme generator.
+    `;
+
+    let out = 
+    `
+${header}
+${body}
+${footer}
+    `;
+
+    fs.writeFile("README.MD",out,(opt)=>{
+        console.log("Pog");
+    });
 
 }
 
@@ -19,28 +113,23 @@ function init() {
             message: 'What is the title of the repo? '
         },
         {
-            type: 'editor',
-            name: 'description',
+            type: 'input',
+            name: 'Description',
             message: 'Descirption of the repo? '
         },
         {
             type: 'input',
-            name: 'table',
-            message: 'What is the table of contents?(seperated by spaces)'
-        },
-        {
-            type: 'editor',
-            name: 'installtion',
+            name: 'Installation',
             message: 'How do you install it? '
         },
         {
-            type: 'editor',
-            name: 'usage',
+            type: 'input',
+            name: 'Usage',
             message: 'How is one supposed to use this? '
         },
         {
             type: 'checkbox',
-            name: 'liscence',
+            name: 'License',
             message: 'What license will you be using? ',
             choices: [
                 "MIT",
@@ -48,17 +137,19 @@ function init() {
                 "Apache",
                 "GPLv3",
                 "BSD 3",
+                "Creative Commons",
+
             ]
     
         },
         {
             type: 'input',
-            name: 'contrib',
+            name: 'Contribute',
             message: 'How can they contribute?'
         },
         {
             type: 'input',
-            name: 'tests',
+            name: 'Tests',
             message: "Anay tests?"
         },
         {
@@ -73,6 +164,7 @@ function init() {
         }
     ]).then((answers) =>{
         console.log(answers);
+        writeToFile(answers)
     }).catch((error)=>{
         console.log("error ",error);
     });
