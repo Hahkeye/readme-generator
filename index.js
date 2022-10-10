@@ -2,13 +2,6 @@
 var inquirer = require("inquirer");
 var fs = require("fs");
 const renderLicense = require("./utils/generateMarkdown");
-// TODO: Create an array of questions for user input
-// const questions = ["Title? ","Table of Contents? ","Installation? ","Usage? ","License? ","Contributing? ","Tests? ","Questions? "];
-
-// TODO: Create a function to write README file
-//function writeToFile(fileName, data)
-
-
 
 function writeToFile(data) {
     let installation="", usage="", contribute="", tests="", table="";
@@ -92,7 +85,6 @@ ${footer}`;
 
 }
 
-// TODO: Create a function to initialize app
 function init() {
     inquirer.prompt([
         {
@@ -151,12 +143,10 @@ function init() {
             message: 'What is your email?'
         }
     ]).then((answers) =>{
-        // console.log(answers);
         writeToFile(answers)
     }).catch((error)=>{
         console.log("error ",error);
     });
 }
 
-// Function call to initialize app
 init();
