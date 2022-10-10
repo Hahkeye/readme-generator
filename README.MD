@@ -1,10 +1,7 @@
 
-
-# asdasdasdasd
+# Readme generator [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Description
-asdadasaasdasdasd
-    
-
+This is a README generator written in node. Very simple and cli based, Asked you a few simple questions and then generates a readme around it.
 
 
 ## Table of Contents
@@ -12,34 +9,22 @@ asdadasaasdasdasd
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
-- [Contribute](#contribute)
-- [Tests](#tests)
 
 ## Installtion
-asdadadasdasdasd
-        
-        
+To install it just download it navigate to the installation folder. Run 'npm i' to get the required node modules.
+
 
 ## Usage
-asdasdadasdas
+To run this simply navigate to the folder via the CLI and run 'node index'
         
 
-## Contribute
-asdasdasdasd
-        
 
-## Tests
-asdasdasda
-        
-    
 
 ## Liscense
-GPLv2
+MIT
 ## Questions
-You can find me on Github under the username: asdasdasd
+You can find me on Github under the username: [Hahkeye](https://github.com/Hahkeye)
 
-Or you can contact me via email @ asdasdasd
+Or you can contact me via email @ realisvenator@gmail.com
 
 This README was generated with a readme generator.
-    
-    

@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
 var inquirer = require("inquirer");
 var fs = require("fs");
+const renderLicense = require("./utils/generateMarkdown");
 // TODO: Create an array of questions for user input
 // const questions = ["Title? ","Table of Contents? ","Installation? ","Usage? ","License? ","Contributing? ","Tests? ","Questions? "];
 
@@ -8,24 +9,18 @@ var fs = require("fs");
 //function writeToFile(fileName, data)
 
 
-// ## Table Of Cotents
-
-// - [Installation And Usage](#installation)
-// - [Usage](#Usage)
-// - [Git Pages](#pages)
-
-
 
 function writeToFile(data) {
-    let installation, usage, contribute, tests, table="";
+    let installation="", usage="", contribute="", tests="", table="";
     // let temp = ``;
+    let temp = renderLicense(data.License);
+    // console.log(temp);
     let header =
-    `
-# ${data.title}
+`
+# ${data.title} ${temp[0]}
 ## Description
 ${data.Description}
-    `;
-
+`;
     for(const[key,val] of Object.entries(data)){
         if(val){
             if(key != "title" && key != "github" && key != "email"){
@@ -34,13 +29,12 @@ ${data.Description}
         }
     }
     installation = 
-        `
+`
 ## Table of Contents
 ${table}
 ## Installtion
 ${data.Installation}
-        
-        `;
+`;
     if(data.Usage){
         usage = 
         `
@@ -71,35 +65,29 @@ ${data.Tests}
         tests="";
     }
     let body = 
-    `
-
-${installation}
+`${installation}
 ${usage}
 ${contribute}
-${tests}
-    `;
+${tests}`;
 
     let footer = 
-    `
+`
 ## Liscense
-${data.License}
+${temp[1]}
 ## Questions
-You can find me on Github under the username: ${data.github}
+You can find me on Github under the username: [${data.github}](https://github.com/${data.github})
 
 Or you can contact me via email @ ${data.email}
 
-This README was generated with a readme generator.
-    `;
+This README was generated with a readme generator.`;
 
     let out = 
-    `
-${header}
+`${header}
 ${body}
-${footer}
-    `;
+${footer}`;
 
     fs.writeFile("README.MD",out,(opt)=>{
-        console.log("Pog");
+        // console.log("Pog");
     });
 
 }
@@ -125,7 +113,7 @@ function init() {
         {
             type: 'input',
             name: 'Usage',
-            message: 'How is one supposed to use this? '
+            message: 'How should the user use this? '
         },
         {
             type: 'checkbox',
@@ -150,7 +138,7 @@ function init() {
         {
             type: 'input',
             name: 'Tests',
-            message: "Anay tests?"
+            message: "Any tests?"
         },
         {
             type: 'input',
@@ -163,7 +151,7 @@ function init() {
             message: 'What is your email?'
         }
     ]).then((answers) =>{
-        console.log(answers);
+        // console.log(answers);
         writeToFile(answers)
     }).catch((error)=>{
         console.log("error ",error);
