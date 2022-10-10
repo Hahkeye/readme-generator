@@ -15,11 +15,8 @@ To install it just download it navigate to the installation folder. Run 'npm i' 
 
 
 ## Usage
-To run this simply navigate to the folder via the CLI and run 'node index'
+To run this simply navigate to the folder via the CLI and run 'node index'. If there is a field you would perfer not to enter just leave it empty.
         
-
-
-
 ## Liscense
 MIT
 ## Questions
